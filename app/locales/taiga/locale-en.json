@@ -326,12 +326,14 @@
         "PAGE_TITLE": "Login - Taiga",
         "PAGE_DESCRIPTION": "Logging in to Taiga, a project management platform for startups and agile developers & designers who want a simple, beautiful tool that makes work truly enjoyable."
     },
-    "AUTH": {
-        "INVITED_YOU": "has invited you to join the project",
-        "NOT_REGISTERED_YET": "Not registered yet?",
-        "REGISTER": "Register",
-        "CREATE_ACCOUNT": "create your free account here"
-    },
+    "AUTH":{ 
+      "INVITED_YOU":"has invited you to join the circle",
+      "NOT_REGISTERED_YET":"Not registered yet?",
+      "REGISTER":"Signup with 3BOT",
+      "CREATE_ACCOUNT":"Signup with 3BOT",
+      "OR": "Or",
+      "THREEBOT": "Login via TF Connect"
+   },
     "LOGIN_COMMON": {
         "HEADER": "I already have a Taiga login",
         "PLACEHOLDER_AUTH_NAME": "Username or email (case sensitive)",

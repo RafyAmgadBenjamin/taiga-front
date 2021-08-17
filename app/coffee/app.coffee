@@ -75,6 +75,27 @@ configure = ($routeProvider, $locationProvider, $httpProvider, $provide, $tgEven
         }
     )
 
+    # Threefold
+    # Auth
+    $routeProvider.when("/login",
+        {
+            templateUrl: "auth/login.html",
+            title: "LOGIN.PAGE_TITLE",
+            description: "LOGIN.PAGE_DESCRIPTION",
+            disableHeader: true,
+            controller: "LoginPage",
+        }
+    )
+    $routeProvider.when("/threebot",
+        {
+            templateUrl: "auth/threebot-login.html",
+            title: "REGISTER.PAGE_TITLE",
+            description: "REGISTER.PAGE_DESCRIPTION",
+            disableHeader: false,
+            controller: "LoginPage"
+        }
+    )
+
     # Discover
     $routeProvider.when("/discover",
         {
@@ -514,7 +535,7 @@ configure = ($routeProvider, $locationProvider, $httpProvider, $provide, $tgEven
             templateUrl: "auth/login.html",
             title: "LOGIN.PAGE_TITLE",
             description: "LOGIN.PAGE_DESCRIPTION",
-            disableHeader: true,
+            disableHeader: false,
             controller: "LoginPage",
         }
     )

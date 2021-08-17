@@ -169,6 +169,13 @@ class AuthService extends taiga.Service
             @.setUser(user)
             @rootscope.$broadcast("auth:login", user)
             return user
+    
+    threebot: (data, $route) -> 
+        user = @model.make_model("users", data)
+        @.setToken(user.auth_token)
+        @.setUser(user)
+        $route.reload()
+        return user
 
     logout: ->
         @.removeToken()
@@ -242,6 +249,53 @@ module.service("$tgAuth", AuthService)
 
 # Directive that manages the visualization of public register
 # message/link on login page.
+ThreebotLoginButton = ($config, templates) ->
+    template = templates.get("auth/threebot-login-btn.html", true)
+
+    templateFn = ->
+        publicRegisterEnabled = $config.get("publicRegisterEnabled")
+        if not publicRegisterEnabled
+            return ""
+        
+        link = $.ajax($config.get('api') + "threebot/login", {
+            type: 'GET',  
+            async: false,
+            success: (data,status,xhr) -> 
+                return data
+            error: (textStatus) -> console.log('Error', textStatus)
+        });
+        url = link.responseJSON.url
+        return template({url:url})
+
+    return {
+        restrict: "AE"
+        scope: {}
+        template: templateFn
+    }
+
+module.directive("tgThreebotLoginButton", ["$tgConfig", "$tgTemplate", ThreebotLoginButton])
+
+ThreeBotLoginDirective = ($auth, $routeParams, $route, $config,  $confirm, $translate, $location, $navUrls) ->
+    link = ($el, $scope) ->    
+        $.ajax($config.get('api') + "auth/callback", {
+            type: 'GET',  
+            beforeSend: (xhr, settings) -> 
+                xhr.setRequestHeader("Authorization",'Bearer ' + "#{$auth.getToken()}")
+                xhr.setRequestHeader("X-Session-Id",taiga.sessionId)
+                xhr.setRequestHeader("Content-Type", "application/json")
+            data: $routeParams,
+            success: (res) -> $auth.threebot(res, $route)
+            error: (xhr) -> 
+                if xhr.status == 400
+                    $location.path($navUrls.resolve("home"))
+                    $route.reload()
+                    $confirm.notify("light-error", $translate.instant("LOGIN_FORM.ERROR_MESSAGE"))
+        });
+
+    return {link:link}
+
+module.directive("tbLogin", ["$tgAuth", "$routeParams", "$route","$tgConfig", "$tgConfirm", 
+                            "$translate", "$tgLocation", "$tgNavUrls", ThreeBotLoginDirective])
 
 PublicRegisterMessageDirective = ($config, $navUrls, $routeParams, templates) ->
     template = templates.get("auth/login-text.html", true)
