@@ -6,7 +6,7 @@
 # Copyright (c) 2021-present Kaleidos Ventures SL
 ###
 
-NavigationBarDirective = (currentUserService, navigationBarService, locationService, navUrlsService, config, feedbackService) ->
+NavigationBarDirective = (currentUserService, navigationBarService, locationService, navUrlsService, config, feedbackService,$route) ->
     link = (scope, el, attrs, ctrl) ->
         scope.vm = {}
 
@@ -53,6 +53,17 @@ NavigationBarDirective = (currentUserService, navigationBarService, locationServ
             feedbackService.sendFeedback()
 
         window._taigaSendFeedback = scope.vm.sendFeedback
+        
+        scope.vm.register = ->
+            url = config.get('api') + "threebot/login"
+            $.ajax url,
+            type: 'GET'
+
+            error: (textStatus) ->
+                console.log('Error', textStatus)
+            success: (data) ->
+                $route.reload()
+                window.location.href = data.url;
 
         scope.$on "$routeChangeSuccess", () ->
             scope.vm.active = null
@@ -67,6 +78,8 @@ NavigationBarDirective = (currentUserService, navigationBarService, locationServ
                     scope.vm.active = 'notifications'
                 when "/projects/"
                     scope.vm.active = 'projects'
+                when "/threebot"
+                    scope.vm.active = 'dashboard'
                 else
                     if path.startsWith('/project')
                         scope.vm.active = 'project'
@@ -86,6 +99,8 @@ NavigationBarDirective.$inject = [
     "$tgNavUrls",
     "$tgConfig",
     "tgFeedbackService"
+    "$route"
+
 ]
 
 angular.module("taigaNavigationBar").directive("tgNavigationBar", NavigationBarDirective)

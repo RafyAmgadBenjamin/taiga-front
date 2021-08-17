@@ -479,6 +479,8 @@ configure = ($routeProvider, $locationProvider, $httpProvider, $provide, $tgEven
         {templateUrl: "user/user-project-settings.html"})
     $routeProvider.when("/user-settings/mail-notifications",
         {templateUrl: "user/mail-notifications.html"})
+    $routeProvider.when("/user-settings/3bot-login-settings",
+        {templateUrl: "user/3bot-login-settings.html"})
     $routeProvider.when("/user-settings/live-notifications",
         {templateUrl: "user/live-notifications.html"})
     $routeProvider.when("/user-settings/web-notifications",
@@ -539,15 +541,15 @@ configure = ($routeProvider, $locationProvider, $httpProvider, $provide, $tgEven
             controller: "LoginPage",
         }
     )
-    if window.taigaConfig.publicRegisterEnabled
-        $routeProvider.when("/register",
-            {
-                templateUrl: "auth/register.html",
-                title: "REGISTER.PAGE_TITLE",
-                description: "REGISTER.PAGE_DESCRIPTION",
-                disableHeader: true
-            }
-        )
+    # if window.taigaConfig.publicRegisterEnabled
+    #     $routeProvider.when("/register",
+    #         {
+    #             templateUrl: "auth/register.html",
+    #             title: "REGISTER.PAGE_TITLE",
+    #             description: "REGISTER.PAGE_DESCRIPTION",
+    #             disableHeader: true
+    #         }
+    #     )
     $routeProvider.when("/forgot-password",
         {
             templateUrl: "auth/forgot-password.html",

@@ -1,0 +1,20 @@
+.threebot-settings {
+    fieldset {
+        margin-bottom: 1rem;
+        width: 50%;
+        &:last-child {
+            margin-top: 2rem;
+        }
+    }
+    label {
+        @include font-type(text);
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+    .button-green {
+        color: $white;
+        display: block;
+        padding: 12px;
+        text-align: center;
+    }
+}

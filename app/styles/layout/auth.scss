@@ -1,7 +1,7 @@
 .auth {
     @include triangled-bg;
     align-items: center;
-    background: $color-link-primary;
+    // background: $primary;
     bottom: 0;
     display: flex;
     flex-direction: row;
@@ -11,40 +11,29 @@
     position: fixed;
     right: 0;
     top: 0;
-    z-index: $first-layer;
-
-    .white-link,
-    .white-link:visited {
-        color: $color-white;
-    }
-    .checksley-error-list {
-        color: $color-white;
-        li {
-            margin: .5rem 0;
-        }
-    }
+    z-index: 999;
     .auth-container {
         flex-basis: 400px;
     }
     .logo-svg {
         text-align: center;
         width: 100%;
-        svg {
-            height: 8rem;
+        img {
+            height: auto;
             width: 8rem;
         }
     }
     .logo {
-        @include font-size(xxlarge);
-        @include font-type(regular);
-        color: $color-white;
+        @include font-size(large);
+        @include font-type(light);
+        // color: $white;
         display: block;
         margin-bottom: 1rem;
         text-align: center;
     }
     .tagline {
         @include font-size(xlarge);
-        color: $color-white;
+        color: $white;
         line-height: 2rem;
         margin-bottom: 1rem;
         text-align: center;
@@ -54,49 +43,32 @@
         margin-bottom: 1rem;
     }
     fieldset {
-        margin-bottom: .5rem;
-        &.end {
-            display: flex;
-            justify-content: flex-end;
-        }
+        margin-bottom: 0.5rem;
     }
     .login-text,
     .register-text {
-        color: $color-white;
-        font-size: .875rem;
+        font-size: 0.875rem;
         margin-top: 2rem;
         padding-bottom: 1rem;
         text-align: center;
         a {
-            color: $color-white;
             text-decoration: underline;
             &:hover {
-                color: $color-gray400;
+                color: $primary-light;
             }
         }
     }
     .register-terms {
-        margin: .5rem 0 .75rem;
-
-        input[type='checkbox'],
-        input[type='radio'] {
-            margin-right: .5rem;
-        }
+        margin: 0.5rem 0 0.75rem;
     }
     .button {
-        color: $color-white;
+        color: $white;
         display: block;
         text-align: center;
     }
     a {
         &:hover {
-            color: $color-white;
-        }
-    }
-    .btn-small {
-        margin: 0 0 0 auto;
-        &.full {
-            width: 100%;
+            color: $white;
         }
     }
 }
@@ -106,16 +78,17 @@
     animation-iteration-count: infinite;
     animation-name: moustache;
     animation-timing-function: ease-in-out;
-    fill: rgba($primary, .9);
+    fill: rgba($primary, 0.9);
     stroke: $primary-light;
     stroke-width: 1px;
     transform-origin: 50% 50%;
-    transition: .3s;
+    transition: 0.3s;
     &:hover {
-        fill: rgba($primary-light, .9);
-        transition: .3s;
+        fill: rgba($primary-light, 0.9);
+        transition: 0.3s;
     }
 }
+
 @keyframes moustache {
     0% {
         transform: rotate(0);
